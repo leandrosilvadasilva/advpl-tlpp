@@ -1,0 +1,14 @@
+#include "totvs.ch"
+
+User Function ExemploInterIf()
+    Local dVencto := CTOD("31/12/2024")
+    
+    If Date() > dVencto
+        Alert("Vencimento ultrapassado!")
+    ElseIf Date() == dVencto
+        Alert("Vencimento na data!")
+    Else
+        Alert("Vencimento dentro do prazo!")
+    Endif
+Return
+

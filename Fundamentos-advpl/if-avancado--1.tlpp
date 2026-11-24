@@ -1,0 +1,22 @@
+#include "totvs.ch"
+
+
+User Function meuPonto()
+
+Local cIdPonto  := PARAMIXB[2]
+Local lRet      := .T.
+
+//Utilizando IF...ELSEIF para tratar múltiplos cenários de pontos de entrada:
+if cIdPonto == "MODELPOS"
+    // Lógica de validação antes da gravação do modelo.
+    lRet    := ValodarModeolo()
+ElseIF cIdPonto == "FORMCOMMITTTSPRE"
+    // Lógica antes da gravação da tabela do formulário
+    lRet    :=  PreparaGravacao()
+ElseIF cIdPonto == "BUTTONBAR"
+    // Adicionar botão personalizado
+    lRet    := {{"Meu Botao", "MEU BOTAO", {|| u_ExevutaAcao()}}}
+    
+endif
+
+Return lRet

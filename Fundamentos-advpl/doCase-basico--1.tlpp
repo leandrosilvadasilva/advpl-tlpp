@@ -1,0 +1,30 @@
+#include "totvs.ch"
+
+/*/{Protheus.doc} ExemploInterCase
+(long_description)
+@type user function
+@author Leandro Silva
+@since 19/11/2026
+@version 1.0
+
+@see (links_or_references)
+    @history 19/11/2026, Leandro Silva, description
+/*/
+User Function ExemploInterCase()
+
+Local nMes      := Month(Date())
+Local cPeriodo  := ""
+
+DO CASE
+    CASE nMes       <= 3
+        cPeriodo    := "Primeiro Trimestre"
+    CASE nMes       >= 4 .AND. nMes <= 6
+        cPeriodo    := "Segundo Trimestre"
+    CASE nMes       >=7 .AND. nMes <= 9
+        cPeriodo    := "Terceiro Trimestre"
+    OTHERWISE
+        cPeriodo    := "Quarto Trimestre"
+ENDCASE
+
+
+Return 

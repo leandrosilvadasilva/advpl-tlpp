@@ -1,0 +1,68 @@
+#include "totvs.ch"
+
+
+
+User Function arrayBasic1()
+
+    Local aExemplo1     := {} as array
+    Local aExemplo2     := {'a','b','c','d',5,7,.T.,nil,{|| alert("ok")}} as array
+    Local aExemplo3     := array(0) as array
+    Local aExemplo4     := array(2) as array
+    Local aExemplo5     := array(1,{"5","4","3"})
+    Local aExemplo6     := {{5,6,7}, {'Opcao 5', 'Opcao 6', 'Opcao 7'}}
+
+
+    Local aExemplo7 := {'ES','SP','RJ','MG','RS','BA','CE'}
+    Local aExemplo8 := {}
+
+    Local aExemplo9 := {}
+
+    aadd(aExemplo8,{'ES','ESPIRITO SANTO'})
+    aadd(aExemplo8,{'SP','SAO PAULO'})
+    aadd(aExemplo8,{'BA','BAHIA'})
+    aadd(aExemplo8,{'PE','PERNAMBUCO'})
+
+    aExemplo9   := aExemplo8
+    aExemplo10  := aClone(aExemplo8)
+
+    
+    
+    nPos1   := aScan(aExemplo7, 'MG')
+    nPos2   := aScan(aExemplo8, {|x| x[2] == 'BAHIA'})
+
+
+
+    aadd(aExemplo1, 1)
+    aadd(aExemplo1, 'A')
+    aadd(aExemplo1, .F.)
+    aadd(aExemplo1,{2,3,4})
+    aadd(aExemplo1,{{5,6,7},{8,9,10}})
+
+    aadd(aExemplo1,{11,12,14,{'op 1','op 2','op 3'}})
+
+
+    aExemplo4[1]    := 'Opcao 1'
+    aExemplo4[2]    := 'Opcao 2'
+    aadd(aExemplo4, 'Opcao 3')
+
+
+    aadd(aExemplo3, {1, 'Opcao 1'})
+    aadd(aExemplo3, {2, 'Opcao 2'})
+    aadd(aExemplo3, {4, 'Opcao 4'})
+    aadd(aExemplo3, {5, 'Opcao 5'})
+
+    aExemplo3[4,1]    := 3
+    aExemplo3[4][2]   := 'Opcao 3'
+
+    aSort(aExemplo3,,, {|x,y| x[1] > y[1]})
+    aSort(aExemplo3,,, {|x,y| x[1] < y[1]})
+
+    aSort(aExemplo5[1],,,{|x,y| x > y})
+
+
+
+
+
+Return 
+
+

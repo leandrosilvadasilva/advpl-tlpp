@@ -1,0 +1,61 @@
+#include "totvs.ch"
+
+
+User Function DecInter(cCodCli, cLoja, nValorPed)
+
+Local lRet      := .T.
+Local cMotivo   := ""
+Local nDesc     := 0
+Local aArea     := {}
+
+//Guard Clause
+if Empty(cCodCli)   .Or.    Empty(cLoja)
+    FWAlertError("Cliente ou Loja não encontrado", "Atenção")
+    Return .F.
+endif
+
+if valType(nValorPed) <> "N" .Or. nValorPed <= 0
+    FWAlertError("Valor do pedido inválido", "Atenção")
+    Return .F.
+endif
+
+//Pegar a área no momento da execução desse fonte
+aArea = GetArea()
+
+dbSelectArea("SA1")
+
+SA1->(SelecOrder(1)) //A1_FILIAL + A1_COD + A1_LOJA
+
+if !SA1->(DBSeek(xFilial("SA1") + cCodCli + cLoja))
+    lRet    := .F.
+    cMotivo := "Cliente não encontrado"
+
+elseif SA1->A1_MSBLQL == "1"
+    lRet    := .F.
+    cMotivo := "Cliente bloqueado"
+
+elseif nValorPed > SA1->A1_LC
+    lRet    := .F.
+    cMotivo := "Pedido acima do limite de crédito"
+
+else
+    //Cliente ok: define o desconto por faixa de valor
+    DO CASE
+        CASE nValorPed >= 10000
+            nDesc   := 10
+        CASE nValorPed >= 5000
+            nDesc   := 5
+        OTHERWISE
+            nDesc   := 0
+    ENDCASE
+endif
+    
+if lRet
+    FWAlertInfo("Pedido liberado. Desconto: " + cValToChar(nDesc) + "%", "OK")
+else
+    FWAlertInfo(cMotivo, "Pedido recusado")
+endif
+
+restArea(aArea)
+
+Return lRet

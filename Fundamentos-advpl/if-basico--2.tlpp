@@ -1,0 +1,35 @@
+#include "totvs.ch"
+
+
+
+
+User Function DecBasic()
+
+Local nNota     := 6.5
+Local cStatus   := ""
+Local cTipo     := "J"
+Local cDescr    := ""
+Local cMsg      := ""
+
+if nNota >= 7
+    cStatus := "Aprovado"
+elseif nNota >= 5 
+    cStatus := "Em recuperação"
+else
+    cStatus := "Reprovado"
+endif
+
+DO CASE 
+    CASE cTipo  == "F"
+        cDescr  := "Pessoa Física"
+    CASE cTipo  == "J"
+        cDescr  := "Pessoa Jurídica"
+    OTHERWISE
+        cDescr  := "Tipo não reconhecido"
+ENDCASE
+
+cMsg    := IIF(nNota >= 7, "Parabéns", "Estudo Mais" )
+
+
+Return 
+

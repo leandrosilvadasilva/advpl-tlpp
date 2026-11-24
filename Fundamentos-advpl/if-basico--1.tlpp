@@ -1,0 +1,25 @@
+#include "totvs.ch"
+
+
+User Function ExemploBasico()
+    Local dVencto := CTOD("31/12/2024")
+    
+    If Date() > dVencto
+        Alert("Vencimento ultrapassado!")
+    Endif
+Return
+
+/*
+Local dVenciemtno := CTOD("31/12/2026")
+
+If Date() > dVenciemtno
+    fwAlertInfo("Boleto vencido")
+Endif
+// Incrementar a ideia de puxar a data do vencimento e 
+// mostrar a data do vencimento e quantos dias faltam
+// incrementar mais, determinando uma data de envio de mensagem
+// alertando que faltam x dias para o vencimento
+// e enviar por email de cadastro do cliente.
+
+
+*/
