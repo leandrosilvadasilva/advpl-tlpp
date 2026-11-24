@@ -1,0 +1,32 @@
+#include 'totvs.ch'
+
+
+/*/{Protheus.doc} usoSelect3
+(long_description)
+@type user function
+@author user
+@since 11/11/2026
+@version version
+@param param_name, param_type, param_descr
+@return return_var, return_type, return_description
+@example
+(examples)
+@see (links_or_references)
+/*/
+User Function usoSelect3()
+
+Local nAreaOrig := 0
+
+if select("SX2") <= 0
+    rpcSetEnv("99","01","admin","99","FAT","usoSelect3")
+    
+endif
+nAreaOrig   := Select()
+FWAlertInfo("A área ativa: " + str(Select(),3) + "  Seu ALIAS:  " + Alias() )
+
+dbSelectArea("SA1")
+dbSelectArea("SB1")
+
+
+
+Return 

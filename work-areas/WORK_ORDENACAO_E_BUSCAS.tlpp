@@ -1,0 +1,187 @@
+#include 'totvs.ch'
+
+Function U_WORK_ORDENACAO_E_BUSCAS
+
+ /* rpcSetEnv('99','01')
+
+  dbSelectArea("SA2")
+  dbSetOrder(retOrder("SA2","A2_FILIAL+A2_COD+A2_NOME"))
+
+
+    indexKey(getArea()[2])
+
+  //SA1->(dbSetOrder(1),dbSeek('  000005'), A1_NOME)
+  cNome := SA1->(dbSetOrder(retOrder("SA1","A1_FILAL+A1_COD")),dbSeek('  000005'), A1_NOME)
+
+  rpcClearEnv()*/
+
+  // OUTRO EXEMPLO: //dbSeek (TERMINAL DE INFORMAÇÃO, NÃO DA UDEMY)
+
+  /*Local aArea       := FWGetArea()
+  Local cMensagem   := ""   
+
+    rpcSetEnv('99','01')
+  //Abre a Tabela de Produtos e posiciona num índice
+  dbSelectArea("SB1")
+  SB1->(dbSetOrder(5))
+
+  //Monta a mensagem e exibe
+  cMensagem :=  "Cadastro de Produtos"  +   CRLF    +   CRLF
+  cMensagem +=  "O índice numérico é: " + cValToChar(SB1->(indexOrd())) +   CRLF
+  cMensagem +=  "E a chave do índice é: " + SB1->(indexKey(indexOrd())) +   CRLF
+  fwAlertInfo(cMensagem, "Teste IndexKey e IndexOrd")
+
+  fwRestArea(aArea)
+  rpcClearEnv()*/
+
+
+   /* 
+
+    rpcSetEnv('99','01')
+
+    dbSelectArea("SA2")
+    dbSetOrder(retOrder("SA2","A2_FILIAL+A2_COD"))
+    cChaveIndice    :=  indexKey(retOrder("SA2","A2_FILIAL+A2_COD"))
+    cChaveBusca     :=  '  00000302'
+    dbSeek(cChaveBusca)
+    dbSeek(cChaveBusca, .T.)
+    dbSkip()
+    dbSkip(2)
+    dbSkip(-3)
+    //cNome   :=  SA2->A2_NOME
+
+    dbGoTo(9)
+    dbGoTo(4)
+    dbGoTo(10)
+    dbGoTo(2)
+
+    dbGoTop()
+    dbGoBottom()
+
+    SA1->(dbSetOrder(2),dbSeek(SA2->(A2_FILIAL+A2_NOME)))
+
+    rpcClearEnv()*/
+
+
+
+//FUNÇÕES BOE E EOG
+
+    Local nQuantidadeDeRegistros    as numeric
+    Local cListaDeFornecedores      as character
+
+
+    rpcSetEnv('99','01')
+
+    
+    SA2->(dbSetOrder(1),dbGoTop())
+
+    /*while .not. SA2->(eof())
+        
+        nQuantidadeDeRegistros++
+        SA2->(dbSkip())
+        
+    Enddo*/
+
+    /**/// outra forma:
+
+    while .T.
+
+            nQuantidadeDeRegistros++
+            SA2->(dbSkip())
+
+            if SA2->(eof())
+                exit
+            endif
+    Enddo
+    
+    while .T.
+
+        cListaDeFornecedores += CRLF + SA2->A2_NOME
+        SA2->(dbSkip(-1))
+        IF SA2->(bof())
+            Exit
+        EndIF
+
+    Enddo
+
+
+
+
+    fwAlertInfo('Quantidade de registros: ' + cValToChar(nQuantidadeDeRegistros))
+    //fwAlertInfo('Quantidade de registros: ' + cValToChar(nQuantidadeDeRegistros) + CRLF + cListaDeFornecedores)
+
+    rpcClearEnv()
+
+
+
+
+/*
+    Local cListaDeFornecedores   as character
+    Local nQuantidadeDeRegistros as numeric
+
+    rpcSetEnv('99','01')
+
+    dbSelectArea("SA2")
+    dbSetOrder(retOrder("SA2","A2_FILIAL+A2_COD"))
+    cChaveIndice := indexKey(retOrder("SA2","A2_FILIAL+A2_COD"))
+    cChaveBusca  := '  00000302'
+    dbSeek(cChaveBusca)
+    dbSeek(cChaveBusca,.T.)
+    dbSkip(1)
+    dbSkip(2)
+    dbSkip(-3)
+
+    dbGoTo(9)
+    dbGoTo(4)
+    dbGoTo(10)
+    dbGoTo(2)
+
+    //-- bof() --> Indica que o ponteiro da area de trabalho esta posicionado no inicio do arquivo
+    //-- eof() --> Indica que o ponteiro da area de trabalho esta posicionado no final do arquivo
+
+    SA2->(dbSetOrder(1),dbGoTop())
+
+    While .T.
+
+        nQuantidadeDeRegistros++
+        SA2->(dbSkip())
+
+        IF SA2->(eof())
+            Exit
+        EndIF    
+
+    Enddo
+
+    While .T.
+
+        cListaDeFornecedores += CRLF + SA2->(A2_COD + " - " + A2_NOME)
+        SA2->(dbSkip(-1))
+
+        IF SA2->(bof())
+            Exit
+        EndIF
+
+    Enddo
+
+    //-- reclock() --> Utilizado para reservar um registro para alteração ou para indicar que sera executada uma inclusao
+    //-- msunlock() --> Utilizado para destravar e confirmar a inclusao/alteracao de registro
+
+    SA2->(dbSetOrder(1),dbGoTop())
+
+    While .not. SA2->(eof())
+
+        SA2->(reclock("SA2",.F.))
+            SA2->A2_NREDUZ := LEFT(SA2->A2_NOME,AT(" ",SA2->A2_NOME))
+        SA2->(msunlock())    
+
+        SA2->(dbSkip())
+
+    Enddo
+
+    //-- dbCloseArea --> Indica que a area de trabalho deve ser encerrada
+    SA2->(dbCloseArea())
+    dbCloseArea()
+
+    rpcClearEnv()
+*/
+Return

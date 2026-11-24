@@ -1,0 +1,37 @@
+#include "totvs.ch"
+
+User Function basicWhile1()
+
+Local x
+Local nFor   := 100
+Local nWhile := 100
+
+    while nWhile > 0
+        nWhile--
+
+        if nWhile = 20
+            nWhile := 10
+            loop //
+            nWhile := 20
+        endif
+
+        if nWhile = 5
+            exit            
+        endif
+
+    enddo
+
+    For x := 1 To nFor Step 1 //step  2 (de quanto em quanto a variável de controle é incrementada)
+    
+        IF nWhile = 20
+            nWhile += 10
+            Loop
+        Endif
+
+        IF nWhile > 60
+            Exit
+        Endif
+        nWhile++
+    Next    
+
+Return 

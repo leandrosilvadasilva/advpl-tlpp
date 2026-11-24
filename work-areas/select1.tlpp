@@ -1,0 +1,45 @@
+#include 'totvs.ch'
+
+/*/{Protheus.doc} usoSelect1
+(long_description)
+@type user function
+@author user
+@since 11/11/2026
+@version version
+@param param_name, param_type, param_descr
+@return return_var, return_type, return_description
+@example
+(examples)
+@see (links_or_references)
+/*/
+User Function usoSelect1()
+
+Local nAreaSA1  := 0
+Local nAreaSB1  := 0
+Local cAlias    := ""
+
+if select("SX2") <= 0
+
+    rpcSetEnv('99','01','admin','99','FAT',)
+    
+endif
+
+    dbSelectArea('SA1')
+    cAlias  := Alias()
+    ConOut("Apos dbSelectArea('SA1') -> Area Ativa = " + Str(Select(),3))
+    FWAlertinfo("Apos dbSelectArea('SA1') -> Area Ativa = " + Str(Select(),3)  + " WorkArea: " + Alias())
+
+    nAreaSA1    := select("SA1")
+    ConOut("Apos dbSelectArea('SA1') -> Area Ativa = " + Str(nAreaSA1,3))
+    FWAlertinfo("Apos dbSelectArea('SA1') -> Area Ativa = " + Str(nAreaSA1,3)  + " WorkArea: " + Alias())
+
+    dbSelectArea("SB1")
+    nAreaSB1        := select("SB1")
+    ConOut("Select('SB1') = " + Str(nAreaSB1,3) + " | Area ativa = " + Str(Select(),3))
+    FWAlertInfo("Trocou a WorkArea para: " + Str(nAreaSB1) + " WorkArea: " + Alias())
+
+
+rpcClearEnv()
+
+Return 
+ 
