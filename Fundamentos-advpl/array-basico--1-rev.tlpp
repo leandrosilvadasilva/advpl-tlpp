@@ -1,0 +1,28 @@
+#include "totvs.ch"
+
+
+// Conteúdo sobre copia de um array em advpl
+// 
+
+
+User Function ARRAYBASICOREV()
+
+
+    Local aExemplo7 := {}
+    Local aExemplo8 := {}
+    Local aExemplo9 := {}
+
+    aadd(aExemplo7, {'SP', 'SÃO PAULO'})
+    aadd(aExemplo7, {'RJ', 'RIO DE JANEIRO'})
+    aadd(aExemplo7, {'PR', 'PARANA'})
+    aadd(aExemplo7, {'PE', 'PERNAMBUCO'})
+
+    aExemplo8   := aExemplo7
+    aExemplo9   := aClone(aExemplo7)
+
+    aExemplo8[4,2]  := 'Ceara'
+    aExemplo9[4,2]  := 'Sergipe'
+
+    aEval(aExemplo7, {|x| fwAlertWarning(x[2],x[1])})
+
+Return 
